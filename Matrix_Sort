@@ -1,0 +1,76 @@
+# Задайте двумерный массив из целых чисел. Количество строк и столбцов задается с клавиатуры. 
+# Отсортировать элементы по возрастанию слева направо и сверху вниз.
+# Например, задан массив:
+# 1 4 7 2
+# 5 9 10 3
+# После сортировки
+# 1 2 3 4
+# 5 7 9 10
+
+
+
+def create_matrix(a, b):
+    matrix = []
+    for i in range(a):
+        matrix.append([0]*b)
+    return matrix
+
+
+def fill_matrix(matrix, a, b):
+    for i in range(a):
+        for j in range(b):
+            matrix[i][j] = int(input('Enter number: '))
+
+
+def print_matrix(matrix):
+    for i in range(len(matrix)):
+        for j in range(len(matrix[i])):
+            print(matrix[i][j], end = ' ')
+        print()
+
+
+
+def matrix_to_array(matrix):
+    array = []
+    for i in range(len(matrix)):
+        for j in range(len(matrix[i])):
+            array.append(matrix[i][j])
+    return array
+
+
+def sort_array(array):
+    for j in range(len(array) -1):
+        for i in range(len(array) -1 ):
+            if array[i] > array[i+1]:
+                temporary = array[i]
+                array[i] = array[i+1]
+                array[i+1] = temporary
+
+
+def array_to_matrix(array, matrix, a):
+    col = 0
+    row = 0
+    for i in range(len(array)):
+        matrix[row][col] = array[i]
+        col += 1
+        if(col == a):
+            row += 1
+            col = 0
+    return matrix
+
+
+rows = int(input('Enter rows quantity: '))
+columns = int(input('Enter columns quantity: '))
+
+table = create_matrix(rows, columns)
+fill_matrix(table, rows, columns)
+print_matrix(table)
+
+numbers = matrix_to_array(table)
+print(numbers)
+sort_array(numbers)
+print(numbers)
+
+table2 = array_to_matrix(numbers, table, columns)
+print_matrix(table2)
+
